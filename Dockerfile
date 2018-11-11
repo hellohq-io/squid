@@ -5,5 +5,6 @@ COPY out .
 
 ENV ASPNETCORE_URLS http://*:5000
 ENV ASPNETCORE_ENVIRONMENT Production
+EXPOSE 5000
 
 ENTRYPOINT ["dotnet", "squid.dll"]
