@@ -1,0 +1,54 @@
+<h1>Dependencies</h1>
+
+<p>The dependencies of each service.</p>
+
+<p *ngIf="!dependencies">
+  <em>Loading...</em>
+</p>
+
+<table class='table' *ngIf="dependencies">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Dependencies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dep of dependencies">
+      <td>{{ dep.repository.name }}</td>
+      <td>
+        <div *ngIf="isUpdateAvailableForRepo(dep)">Updates available</div>
+        <div *ngIf="!isUpdateAvailableForRepo(dep)">No update available</div>
+        <div *ngIf="dep.hidden" (click)="toggleDisplay(dep)" style="text-decoration: underline; cursor: pointer;">Show more</div>
+        <div *ngIf="!dep.hidden" (click)="toggleDisplay(dep)" style="text-decoration: underline; cursor: pointer;">Show less</div>
+
+        <table class='table' *ngIf="!dep.hidden && dep.packageDependencies">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Version</th>
+              <th>Latest</th>
+              <th>Source</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pd of dep.packageDependencies">
+              <td>{{ pd.packageId }}</td>
+              <td>{{ pd.version }}</td>
+              <td>{{ pd.latestVersion }}</td>
+              <td>{{ pd.feedName }}</td>
+              <td>
+                <input type="checkbox" name="update" *ngIf="isUpdateAvailable(pd.version, pd.latestVersion)" (change)="toggleSelection(dep, pd)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button type="submit" class="hq-btn" (click)="updateDependencies(dep)" *ngIf="!dep.hidden" >
+          <span>Update</span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

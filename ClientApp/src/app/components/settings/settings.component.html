@@ -1,0 +1,19 @@
+<h1>Settings</h1>
+
+<p>Configure the behavior of squid</p>
+
+<form [formGroup]="repoForm" *ngIf="repoForm">
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Bitbucket User Name</label>
+    <input class="hq-frm__control" type="text" name="name" formControlName="name" placeholder="Your Bitbucket user name" />
+    <span *ngIf="formErrors['name']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['name'] }}</span>
+  </div>
+
+  <button type="submit" class="hq-btn" (click)="saveRepo()">
+    <span>Save</span>
+  </button>
+
+  <button type="submit" class="hq-btn" (click)="clearForm()">
+    <span>Clear</span>
+  </button>
+</form>

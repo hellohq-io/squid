@@ -1,0 +1,76 @@
+<h1>NuGet Feeds</h1>
+
+<p>Configure your private NuGet feeds. The public NuGet feed is included automatically.</p>
+
+<p *ngIf="!nugetfeeds"><em>Loading...</em></p>
+
+<!-- Grid -->
+<div class="grid-bg" *ngIf="nugetfeeds">
+    <table #table class="hq-tbl">
+
+      <!--Header-->
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Feed URL</th>
+        </tr>
+      </thead>
+
+      <!--Data-->
+      <tbody>
+        <tr *ngFor="let feed of nugetfeeds">
+          <td>{{ feed.name }}</td>
+          <td>{{ feed.feedURL }}</td>
+          <td>
+            <a *ngIf="feed.valid" href="#" data-toggle="tooltip" title="Valid">
+              <span class="glyphicon glyphicon-ok" style="color: #27EC60" aria-hidden="true"></span>
+            </a>
+            <a *ngIf="!feed.valid" href="#" data-toggle="tooltip" [title]="feed.errorMessage">
+              <span class="glyphicon glyphicon-exclamation-sign" style="color: #E90079" aria-hidden="true"></span>
+            </a>
+          </td>
+          <td>
+            <button type="submit" class="hq-btn" (click)="updateFeedForm(feed)">
+              <span>Edit</span>
+            </button>
+          </td>
+          <td>
+            <button type="submit" class="hq-btn" (click)="deleteFeedForm(feed)">
+              <span>Delete</span>
+            </button>
+          </td>
+        </tr>
+    </table>
+
+  </div>
+
+  <h3 *ngIf="!currentFeedId">Add NuGet Feed</h3>
+  <h3 *ngIf="currentFeedId">Edit NuGet Feed</h3>
+
+  <form [formGroup]="feedForm" *ngIf="feedForm">
+    <div class="hq-frm__group">
+      <label class="hq-frm__label">Name</label>
+      <input class="hq-frm__control" type="text" name="name" formControlName="name" placeholder="The name of your NuGet feed" />
+      <span *ngIf="formErrors['name']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['name'] }}</span>
+    </div>
+
+    <div class="hq-frm__group">
+      <label class="hq-frm__label">Feed URL</label>
+      <input class="hq-frm__control" type="text" name="feedURL" formControlName="feedURL" placeholder="The NuGet feed URL, i.e. https://www.myget.org/F/squid/api/v3/query" />
+      <span *ngIf="formErrors['feedURL']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['feedURL'] }}</span>
+    </div>
+
+    <div class="hq-frm__group">
+      <label class="hq-frm__label">API Key</label>
+      <input class="hq-frm__control" type="password" name="apiKey" formControlName="apiKey" placeholder="The NuGet feed API Key" />
+      <span *ngIf="formErrors['apiKey']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['apiKey'] }}</span>
+    </div>
+
+    <button type="submit" class="hq-btn" (click)="saveFeed()">
+      <span>Save</span>
+    </button>
+
+    <button type="submit" class="hq-btn" (click)="clearForm()">
+      <span>Clear</span>
+    </button>
+  </form>

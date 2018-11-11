@@ -1,0 +1,106 @@
+<h1>Repositories</h1>
+
+<p>Configure the repositories you want squid to update.</p>
+
+<p *ngIf="!repositories">
+  <em>Loading...</em>
+</p>
+
+<!-- Grid -->
+<div class="grid-bg" *ngIf="repositories">
+  <table #table class="hq-tbl">
+
+    <!--Header-->
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Repo Slug</th>
+        <th>Branch</th>
+        <th>Project File</th>
+      </tr>
+    </thead>
+
+    <!--Data-->
+    <tbody>
+      <tr *ngFor="let repo of repositories">
+        <td>{{ repo.name }}</td>
+        <td>{{ repo.repoSlug }}</td>
+        <td>{{ repo.branch }}</td>
+        <td>{{ repo.projectFile }}</td>
+        <td>
+          <a *ngIf="repo.valid" href="#" data-toggle="tooltip" title="Valid">
+            <span class="glyphicon glyphicon-ok" style="color: #27EC60" aria-hidden="true"></span>
+          </a>
+          <a *ngIf="!repo.valid" href="#" data-toggle="tooltip" [title]="repo.errorMessage">
+            <span class="glyphicon glyphicon-exclamation-sign" style="color: #E90079" aria-hidden="true"></span>
+          </a>
+        </td>
+        <td>
+          <button type="submit" class="hq-btn" (click)="updateRepoForm(repo)">
+            <span>Edit</span>
+          </button>
+        </td>
+        <td>
+          <button type="submit" class="hq-btn" (click)="deleteRepoForm(repo)">
+            <span>Delete</span>
+          </button>
+        </td>
+      </tr>
+  </table>
+
+</div>
+
+<h3 *ngIf="!currentRepoId">Add Repository</h3>
+<h3 *ngIf="currentRepoId">Edit Repository</h3>
+
+<form [formGroup]="repoForm" *ngIf="repoForm">
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Name</label>
+    <input class="hq-frm__control" type="text" name="name" formControlName="name" placeholder="A readable name of your repository" />
+    <span *ngIf="formErrors['name']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['name'] }}</span>
+  </div>
+
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Team Name</label>
+    <input class="hq-frm__control" type="text" name="teamName" formControlName="teamName" placeholder="The name of your Bitbucket team" />
+    <span *ngIf="formErrors['teamName']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['teamName'] }}</span>
+  </div>
+
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Repo Slug</label>
+    <input class="hq-frm__control" type="text" name="repoSlug" formControlName="repoSlug" placeholder="The Bitbucket identifier of your repository" />
+    <span *ngIf="formErrors['repoSlug']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['repoSlug'] }}</span>
+  </div>
+
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Branch</label>
+    <input class="hq-frm__control" type="text" name="branch" formControlName="branch" placeholder="The branch squid should observe"/>
+    <span *ngIf="formErrors['branch']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['branch'] }}</span>
+  </div>
+
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Project File</label>
+    <input class="hq-frm__control" type="text" name="projectFile" formControlName="projectFile" placeholder="The relative path to your .csproj file from the repository root, i.e. service/squid.csproj" />
+    <span *ngIf="formErrors['projectFile']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['projectFile'] }}</span>
+  </div>
+
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Username</label>
+    <input class="hq-frm__control" type="text" name="username" formControlName="username" placeholder="The Bitbucket username for authentication" />
+    <span *ngIf="formErrors['username']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['username'] }}</span>
+  </div>
+
+  <div class="hq-frm__group">
+    <label class="hq-frm__label">Password</label>
+    <input class="hq-frm__control" type="password" name="password" formControlName="password" placeholder="The Bitbucket password for authentication" />
+    <span *ngIf="formErrors['password']" class="hq-frm__info hq-frm__info--alert">{{ formErrors['password'] }}</span>
+  </div>
+
+  <button type="submit" class="hq-btn" (click)="saveRepo()">
+    <span>Save</span>
+  </button>
+
+  <button type="submit" class="hq-btn" (click)="clearForm()">
+    <span>Clear</span>
+  </button>
+</form>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <PackageId>TimeTrackingsService</PackageId>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <VersionSuffix>100</VersionSuffix>
+    <Version>0.1.$(VersionSuffix)</Version>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1591;1701;1702;1705;NU1701</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>QStyleRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="lang\de.po">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lang\en.po">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GeoCoordinate.NetCore" Version="1.0.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.0.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.2.1" />
+    <PackageReference Include="morelinq" Version="2.10.0" />
+    <PackageReference Include="AutoMapper" Version="6.2.1" />
+
+    <PackageReference Include="Orbit" Version="0.6.591" />
+    <PackageReference Include="Heimdall" Version="0.7.144" />
+    <PackageReference Include="SETI" Version="1.0.21" />
+    <PackageReference Include="Asteroids" Version="1.2.41" />
+    <PackageReference Include="Horizon" Version="1.4.327" />
+    <PackageReference Include="Horizon.Orbit.Connector" Version="1.4.327" />
+    <PackageReference Include="Enterprise" Version="1.2.82" />
+    <PackageReference Include="FTL" Version="0.3.197" />
+    <PackageReference Include="Area51" Version="1.1.25" />
+    <PackageReference Include="GalacticStandardCalendar" Version="0.2.63" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <ProjectReference Include="..\..\phobos\phobos\phobos.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\enterprise\Enterprise\Enterprise.csproj" />     -->
+    <!-- <ProjectReference Include="..\..\area-51\Area51\Area51.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\seti\SETI\SETI.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\gsc\GalacticStandardCalendar\GalacticStandardCalendar.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\asteroids\Asteroids\Asteroids.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\ftl\FTL\FTL.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\orbit\Orbit\Orbit.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\horizon\Horizon\Horizon.csproj" /> -->
+    <!-- <ProjectReference Include="..\..\horizon\Horizon.Orbit.Connector\Horizon.Orbit.Connector.csproj" /> -->
+  </ItemGroup>
+</Project>
